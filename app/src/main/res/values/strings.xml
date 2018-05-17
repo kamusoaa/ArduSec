@@ -5,9 +5,9 @@
     <string name="slide_text3">Для того, чтобы защитить свой дом, Вам необходимо приобрести SIM-карту и потратить 15 минут времени на прочтение инструкции</string>
     <string name="slide_text4">Вы можете как угодно расширять функционал Вашей системы с помощью дополнительных датчиков и модулей</string>
 
-    <string name="edittext_username"> <font size = "13"> Имя пользователя</font></string>
-    <string name="edittext_password"> <font size = "13"> Пароль</font></string>
-    <string name="edittext_phone"> <font size = "13"> Номер телефона</font></string>
-    <string name="tv_to_reg"><font size = "14"><u>Нет аккаунта? Зарегистрируй!</u></font></string>
+    <string name="edittext_username"> <font size="13"> Имя пользователя</font></string>
+    <string name="edittext_password"> <font size="13"> Пароль</font></string>
+    <string name="edittext_phone"> <font size="13"> Номер телефона</font></string>
+    <string name="tv_to_reg"><font size="14"><u>Нет аккаунта? Зарегистрируй!</u></font></string>
 
 </resources>

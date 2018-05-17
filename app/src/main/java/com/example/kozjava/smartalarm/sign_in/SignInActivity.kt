@@ -2,25 +2,55 @@ package com.example.kozjava.smartalarm.sign_in
 
 import android.animation.Animator
 import android.annotation.TargetApi
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.os.AsyncTask
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
+import android.util.Log
+import android.view.View
 import android.view.WindowManager
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import com.example.kozjava.smartalarm.R
+import com.example.kozjava.smartalarm.models.user.User
+import com.example.kozjava.smartalarm.sign_up.SignUpActivity
 import com.romainpiel.shimmer.Shimmer
 import com.romainpiel.shimmer.ShimmerTextView
 
 class SignInActivity : AppCompatActivity() {
 
+    private lateinit var username: EditText
+    private lateinit var password: EditText
+    private lateinit var signInButton: Button
+    private lateinit var linkToReg: ShimmerTextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
         changeStatusColorBar()
-        var shimmer : Shimmer = Shimmer()
-        var tv : ShimmerTextView = findViewById(R.id.shimmer_tv)
+        var shimmer: Shimmer = Shimmer()
+        username = findViewById(R.id.sign_in_username)
+        password = findViewById(R.id.sign_in_password)
+        signInButton = findViewById(R.id.sign_in_button)
+        linkToReg = findViewById(R.id.shimmer_tv)
+
+        signInButton.setOnClickListener {
+            onButtonClick()
+            Log.i("TAG","meh")
+        }
+
+        linkToReg.setOnClickListener {
+            var intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+        }
+
         shimmer.setDuration(7000)
                 .setStartDelay(2000)
                 .setDirection(Shimmer.ANIMATION_DIRECTION_LTR)
@@ -37,14 +67,33 @@ class SignInActivity : AppCompatActivity() {
                     override fun onAnimationStart(p0: Animator?) {
                     }
                 })
-                .start(tv)
+                .start(linkToReg)
+
     }
 
-    private fun changeStatusColorBar(){
+
+    private fun changeStatusColorBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val window = window
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             window.statusBarColor = this.resources.getColor(R.color.sign_primary)
         }
     }
+
+    private fun onButtonClick() {
+        if(username.text.isNotEmpty() && password.text.isNotBlank()){
+            var user = User(username.text.toString(), password.text.toString())
+            SignInTask(this, user).execute()
+        }
+        else {
+            val alertDialog = AlertDialog.Builder(this).setTitle("Ошибка")
+                    .setMessage("Проверьте введенные данные")
+                    .setPositiveButton("OK",
+                    {dialogInterface, i ->  })
+            alertDialog.show()
+        }
+    }
 }
+
+
+
