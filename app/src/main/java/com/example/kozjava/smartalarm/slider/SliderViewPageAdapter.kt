@@ -2,23 +2,25 @@ package com.example.kozjava.smartalarm.slider
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Typeface
 import android.support.v4.view.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.activity_intro.view.*
 
-class SliderViewPageAdapter(private val activity : Activity) : PagerAdapter() {
+class SliderViewPageAdapter(private val activity : Activity, var layouts : IntArray) : PagerAdapter() {
 
     lateinit var layoutInflater : LayoutInflater
-    var layouts: IntArray? = null
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view == `object`
     }
 
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
+
         layoutInflater = activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = layoutInflater.inflate(layouts!![position], container, false)
+        val view = layoutInflater.inflate(layouts[position], container, false)
         container.addView(view)
         return view
     }
@@ -29,7 +31,7 @@ class SliderViewPageAdapter(private val activity : Activity) : PagerAdapter() {
     }
 
     override fun getCount(): Int {
-        return layouts!!.size
+        return layouts.size
     }
 
 }

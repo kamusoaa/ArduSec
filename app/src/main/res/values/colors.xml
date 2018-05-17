@@ -40,4 +40,9 @@
         <item>@color/dot_dark_screen4</item>
     </array>
 
+    <!-- Sign in and Sign up activities !-->
+    <color name="sign_primary">#e91e63</color>
+    <color name="sign_primary_dark">#d81b60</color>
+    <color name="sign_azur">#f1f5f8</color>
+
 </resources>

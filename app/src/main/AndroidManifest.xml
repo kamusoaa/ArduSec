@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".slider.SliderActivity"></activity>
+        <activity android:name=".slider.SliderActivity" />
+        <activity android:name=".sign_in.SignInActivity"></activity>
     </application>
 
 </manifest>

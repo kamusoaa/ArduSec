@@ -9,7 +9,6 @@ class PrefManager(internal var _context: Context) {
     internal var pref: SharedPreferences
     internal var editor: SharedPreferences.Editor
 
-    // shared pref mode
     internal var PRIVATE_MODE = 0
 
     var isFirstTimeLaunch: Boolean
@@ -25,9 +24,7 @@ class PrefManager(internal var _context: Context) {
     }
 
     companion object {
-        // Shared preferences file name
         private val PREF_NAME = "ardusec"
-
         private val IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch"
     }
 
