@@ -4,18 +4,13 @@ import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Context
 import android.os.AsyncTask
-import android.os.SystemClock
+import android.support.v7.app.AlertDialog
 import android.util.Log
-import android.widget.Toast
+import com.example.kozjava.smartalarm.models.user.Response
 import com.example.kozjava.smartalarm.models.user.User
 import com.example.kozjava.smartalarm.settings.Config
-import org.json.JSONObject
-import java.io.*
-import java.lang.reflect.Method
-import java.net.HttpURLConnection
-import java.net.URL
-
-import khttp.get
+import com.example.kozjava.smartalarm.settings.PrefManager
+import com.google.gson.Gson
 import khttp.post
 
 /**
@@ -25,6 +20,8 @@ class SignInTask(context: Context, user : User) : AsyncTask<Void, Void, String>(
 
     private var dialog : ProgressDialog
     private lateinit var user : User
+    private lateinit var prefManager : PrefManager
+
     @SuppressLint("StaticFieldLeak")
     private lateinit var context : Context
     init {
@@ -37,7 +34,7 @@ class SignInTask(context: Context, user : User) : AsyncTask<Void, Void, String>(
 
         val payload = mapOf("username" to user.username,
                         "password" to user.passwd)
-        val r = post(Config.getServerAddress()+"/reg/registration", data = payload)
+        val r = post(Config.getServerAddress()+"/reg/login", data = payload)
         Log.i("TAG", r.text)
         return r.text
     }
@@ -52,8 +49,19 @@ class SignInTask(context: Context, user : User) : AsyncTask<Void, Void, String>(
 
     override fun onPostExecute(result: String?) {
         if(dialog.isShowing) dialog.dismiss()
-
-        Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
+        var gson = Gson()
+        var response = gson?.fromJson(result, Response::class.java)
+        if(response.code.equals("404")){
+            val alertDialog = AlertDialog.Builder(context).setTitle("Ошибка")
+                    .setMessage(response.response)
+                    .setPositiveButton("OK",
+                            {dialogInterface, i ->  })
+            alertDialog.show()
+        }
+        else{
+            prefManager = PrefManager(context)
+            prefManager.username = user.username
+        }
     }
 
 

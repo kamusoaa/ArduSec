@@ -8,12 +8,15 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.text.Html
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.kozjava.smartalarm.R
+import com.example.kozjava.smartalarm.home.HomeActivity
+import com.example.kozjava.smartalarm.settings.PrefManager
 import com.example.kozjava.smartalarm.sign_in.SignInActivity
 
 class SliderActivity : AppCompatActivity() {
@@ -36,7 +39,7 @@ class SliderActivity : AppCompatActivity() {
 
         prefManager = PrefManager(this)
         if (!prefManager.isFirstTimeLaunch) {
-            launchHomeScreen()
+            launchSignInScreen()
             finish()
         }
 
@@ -63,13 +66,13 @@ class SliderActivity : AppCompatActivity() {
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener)
 
 
-        btnSkip.setOnClickListener {view -> launchHomeScreen()}
+        btnSkip.setOnClickListener {view -> launchSignInScreen()}
         btnNext.setOnClickListener{view ->
             var current : Int = getItem(+1)
             if(current < layouts.size)
                 viewPager.setCurrentItem(current)
             else
-                launchHomeScreen()
+                launchSignInScreen()
         }
     }
 
@@ -99,9 +102,15 @@ class SliderActivity : AppCompatActivity() {
             window.statusBarColor = Color.TRANSPARENT
         }
     }
-    private fun launchHomeScreen(){
+    private fun launchSignInScreen(){
         prefManager.isFirstTimeLaunch = false
         val intent = Intent(this,SignInActivity::class.java )
+        startActivity(intent)
+    }
+
+    private fun launchHomeScreen(){
+        prefManager.isFirstTimeLaunch = false
+        val intent = Intent(this,HomeActivity::class.java )
         startActivity(intent)
     }
 

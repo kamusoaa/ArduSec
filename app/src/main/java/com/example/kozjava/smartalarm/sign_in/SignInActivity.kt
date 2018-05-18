@@ -19,7 +19,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.kozjava.smartalarm.R
+import com.example.kozjava.smartalarm.home.HomeActivity
 import com.example.kozjava.smartalarm.models.user.User
+import com.example.kozjava.smartalarm.settings.PrefManager
 import com.example.kozjava.smartalarm.sign_up.SignUpActivity
 import com.romainpiel.shimmer.Shimmer
 import com.romainpiel.shimmer.ShimmerTextView
@@ -36,6 +38,11 @@ class SignInActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_in)
         changeStatusColorBar()
         var shimmer: Shimmer = Shimmer()
+        var prefManager = PrefManager(this)
+        if(prefManager.username.isNotEmpty())
+            launchHomeScreen()
+
+
         username = findViewById(R.id.sign_in_username)
         password = findViewById(R.id.sign_in_password)
         signInButton = findViewById(R.id.sign_in_button)
@@ -79,7 +86,10 @@ class SignInActivity : AppCompatActivity() {
             window.statusBarColor = this.resources.getColor(R.color.sign_primary)
         }
     }
-
+    private fun launchHomeScreen(){
+        val intent = Intent(this, HomeActivity::class.java )
+        startActivity(intent)
+    }
     private fun onButtonClick() {
         if(username.text.isNotEmpty() && password.text.isNotBlank()){
             var user = User(username.text.toString(), password.text.toString())
