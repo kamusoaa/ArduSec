@@ -3,9 +3,11 @@ package com.example.kozjava.smartalarm.sign_in
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.os.AsyncTask
 import android.support.v7.app.AlertDialog
 import android.util.Log
+import com.example.kozjava.smartalarm.home.HomeActivity
 import com.example.kozjava.smartalarm.models.user.Response
 import com.example.kozjava.smartalarm.models.user.User
 import com.example.kozjava.smartalarm.settings.Config
@@ -61,6 +63,8 @@ class SignInTask(context: Context, user : User) : AsyncTask<Void, Void, String>(
         else{
             prefManager = PrefManager(context)
             prefManager.username = user.username
+            var intent = Intent(context, HomeActivity::class.java)
+            context.startActivity(intent)
         }
     }
 

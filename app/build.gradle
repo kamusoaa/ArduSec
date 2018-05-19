@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
-
+apply plugin: 'realm-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -20,6 +20,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    realm {
+        syncEnabled = true;
+    }
 }
 
 dependencies {
@@ -34,4 +37,5 @@ dependencies {
     compile 'com.romainpiel.shimmer:library:1.4.0@aar'
     compile files('libs/khttp-0.1.0.jar')
     implementation 'com.google.code.gson:gson:2.8.4'
+
 }

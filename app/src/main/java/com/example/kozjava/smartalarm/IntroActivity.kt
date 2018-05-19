@@ -13,8 +13,8 @@ import com.example.kozjava.smartalarm.slider.SliderActivity
 class IntroActivity : AppCompatActivity() {
 
 
-    internal lateinit var textView : TextView
-    internal lateinit var imageView: ImageView
+    private lateinit var textView : TextView
+    private lateinit var imageView: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intro)

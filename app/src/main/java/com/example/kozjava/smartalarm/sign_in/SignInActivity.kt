@@ -92,7 +92,9 @@ class SignInActivity : AppCompatActivity() {
     }
     private fun onButtonClick() {
         if(username.text.isNotEmpty() && password.text.isNotBlank()){
-            var user = User(username.text.toString(), password.text.toString())
+            var user = User()
+            user.username = username.text.toString()
+            user.passwd = password.text.toString()
             SignInTask(this, user).execute()
         }
         else {

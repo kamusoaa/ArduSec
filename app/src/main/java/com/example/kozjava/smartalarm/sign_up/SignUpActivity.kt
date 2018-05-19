@@ -1,10 +1,11 @@
 package com.example.kozjava.smartalarm.sign_up
 
-import android.content.Context
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -12,6 +13,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.kozjava.smartalarm.R
+import com.example.kozjava.smartalarm.models.user.User
+import io.realm.Realm
+import kotlinx.android.synthetic.main.activity_home.*
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -20,6 +24,7 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var phone : EditText
     private lateinit var signUpButton : Button
     var isAnimated = false
+    lateinit var realm : Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -31,6 +36,8 @@ class SignUpActivity : AppCompatActivity() {
         password = findViewById(R.id.sign_up_password)
         username = findViewById(R.id.sign_up_username)
         phone.visibility = View.INVISIBLE
+        Realm.init(this)
+        realm = Realm.getDefaultInstance()
 
 
         val editTextAnimation = AnimationUtils.loadAnimation(this, R.anim.edittextanimation)
@@ -44,6 +51,18 @@ class SignUpActivity : AppCompatActivity() {
 
             override fun onAnimationEnd(p0: Animation?) {
                 phone.visibility = View.VISIBLE
+            }
+
+            override fun onAnimationStart(p0: Animation?) {
+            }
+
+        })
+        buttonAnimation.setAnimationListener(object : Animation.AnimationListener{
+            override fun onAnimationRepeat(p0: Animation?) {
+            }
+
+            override fun onAnimationEnd(p0: Animation?) {
+                signUpButton.y = signUpButton.y + 150F
             }
 
             override fun onAnimationStart(p0: Animation?) {
@@ -69,5 +88,20 @@ class SignUpActivity : AppCompatActivity() {
         })
 
 
+        signUpButton.setOnClickListener({view ->
+            if(password.text.length < 8){
+                val alertDialog = AlertDialog.Builder(this).setTitle("Ошибка")
+                        .setMessage("Пароль должен содержать 8 и более символов")
+                        .setPositiveButton("OK",
+                                {dialogInterface, i ->  })
+                alertDialog.show()
+            }
+            else {
+                SignUpTask(this, username.text.toString(),
+                        phone.text.toString(),
+                        password.text.toString()).execute()
+                Log.i("TAG", "Async")
+            }
+        })
     }
 }
