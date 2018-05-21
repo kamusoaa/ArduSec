@@ -45,4 +45,9 @@
     <color name="sign_primary_dark">#d81b60</color>
     <color name="sign_azur">#f1f5f8</color>
 
+    <!-- Colors for sliding tab -->
+    <color name="sliding_primary">#00897B</color>
+    <color name="sliding_primaryDark">#00695c</color>
+    <color name="sliding_scroll">#004d40</color>
+
 </resources>

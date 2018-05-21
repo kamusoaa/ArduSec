@@ -37,5 +37,4 @@ dependencies {
     compile 'com.romainpiel.shimmer:library:1.4.0@aar'
     compile files('libs/khttp-0.1.0.jar')
     implementation 'com.google.code.gson:gson:2.8.4'
-
 }

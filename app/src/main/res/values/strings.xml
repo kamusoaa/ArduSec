@@ -10,4 +10,7 @@
     <string name="edittext_phone"> <font size="13"> Номер телефона</font></string>
     <string name="tv_to_reg"><font size="14"><u>Нет аккаунта? Зарегистрируй!</u></font></string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
