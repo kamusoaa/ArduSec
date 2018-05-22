@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.util.Log
 import com.example.kozjava.smartalarm.R
+
 
 class HomeActivity : AppCompatActivity() {
 
@@ -23,8 +23,8 @@ class HomeActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.tool_bar)
         setSupportActionBar(toolbar)
 
-
         adapter = ViewPageAdapter(supportFragmentManager, titles,numOfTabs)
+        adapter.setContext(this)
         viewPager = findViewById(R.id.pager)
         viewPager.adapter = adapter
 

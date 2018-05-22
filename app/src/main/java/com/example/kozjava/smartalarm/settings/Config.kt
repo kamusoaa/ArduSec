@@ -6,7 +6,7 @@ package com.example.kozjava.smartalarm.settings
 class Config {
 
     companion object {
-        fun getServerAddress() : String{
+        fun getServerAddress(): String {
             return "http://gsmserver.herokuapp.com"
         }
     }

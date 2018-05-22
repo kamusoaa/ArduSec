@@ -8,7 +8,7 @@ import android.os.AsyncTask
 import android.support.v7.app.AlertDialog
 import android.util.Log
 import com.example.kozjava.smartalarm.home.HomeActivity
-import com.example.kozjava.smartalarm.models.user.Response
+import com.example.kozjava.smartalarm.models.Response
 import com.example.kozjava.smartalarm.models.user.User
 import com.example.kozjava.smartalarm.settings.Config
 import com.example.kozjava.smartalarm.settings.PrefManager

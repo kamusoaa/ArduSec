@@ -19,19 +19,10 @@ import android.widget.TextView;
 import com.example.kozjava.smartalarm.R;
 
 public class SlidingTabLayout extends HorizontalScrollView {
-    public interface TabColorizer {
-
-        /**
-         * @return return the color of the indicator used when {@code position} is selected.
-         */
-        int getIndicatorColor(int position);
-
-    }
-
     private static final int TITLE_OFFSET_DIPS = 24;
     private static final int TAB_VIEW_PADDING_DIPS = 16;
     private static final int TAB_VIEW_TEXT_SIZE_SP = 12;
-
+    private final SlidingTabStrip mTabStrip;
     private int mTitleOffset;
 
     private int mTabViewLayoutId;
@@ -42,8 +33,6 @@ public class SlidingTabLayout extends HorizontalScrollView {
     private SparseArray<String> mContentDescriptions = new SparseArray<String>();
     private ViewPager.OnPageChangeListener mViewPagerPageChangeListener;
 
-    private final SlidingTabStrip mTabStrip;
-
     public SlidingTabLayout(Context context) {
         this(context, null);
     }
@@ -51,6 +40,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
     public SlidingTabLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
+
     public SlidingTabLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
@@ -67,7 +57,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
     /**
      * Set the custom {@link TabColorizer} to be used.
-     *
+     * <p>
      * If you only require simple custmisation then you can use
      * {@link #setSelectedIndicatorColors(int...)} to achieve
      * similar effects.
@@ -87,6 +77,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
     public void setSelectedIndicatorColors(int... colors) {
         mTabStrip.setSelectedIndicatorColors(colors);
     }
+
     /**
      * Set the {@link ViewPager.OnPageChangeListener}. When using {@link SlidingTabLayout} you are
      * required to set any {@link ViewPager.OnPageChangeListener} through this method. This is so
@@ -102,7 +93,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
      * Set the custom layout to be inflated for the tab views.
      *
      * @param layoutResId Layout id to be inflated
-     * @param textViewId id of the {@link TextView} in the inflated view
+     * @param textViewId  id of the {@link TextView} in the inflated view
      */
     public void setCustomTabView(int layoutResId, int textViewId) {
         mTabViewLayoutId = layoutResId;
@@ -152,7 +143,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
         final View.OnClickListener tabClickListener = new TabClickListener();
 
         for (int i = 0; i < adapter.getCount(); i++) {
-            Log.i("TAG", "Total adapters:" +String.valueOf(adapter.getCount()));
+            Log.i("TAG", "Total adapters:" + String.valueOf(adapter.getCount()));
             View tabView = null;
             TextView tabTitleView = null;
 
@@ -224,6 +215,15 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
             scrollTo(targetScrollX, 0);
         }
+    }
+
+    public interface TabColorizer {
+
+        /**
+         * @return return the color of the indicator used when {@code position} is selected.
+         */
+        int getIndicatorColor(int position);
+
     }
 
     private class InternalViewPagerListener implements ViewPager.OnPageChangeListener {

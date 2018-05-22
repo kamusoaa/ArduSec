@@ -5,26 +5,20 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import com.example.kozjava.smartalarm.R
-import com.example.kozjava.smartalarm.models.user.User
-import io.realm.Realm
-import kotlinx.android.synthetic.main.activity_home.*
 
 class SignUpActivity : AppCompatActivity() {
 
-    private lateinit var username : EditText
-    private lateinit var password : EditText
-    private lateinit var phone : EditText
-    private lateinit var signUpButton : Button
+    private lateinit var username: EditText
+    private lateinit var password: EditText
+    private lateinit var phone: EditText
+    private lateinit var signUpButton: Button
     var isAnimated = false
-    lateinit var realm : Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -36,16 +30,13 @@ class SignUpActivity : AppCompatActivity() {
         password = findViewById(R.id.sign_up_password)
         username = findViewById(R.id.sign_up_username)
         phone.visibility = View.INVISIBLE
-        Realm.init(this)
-        realm = Realm.getDefaultInstance()
-
 
         val editTextAnimation = AnimationUtils.loadAnimation(this, R.anim.edittextanimation)
         val buttonAnimation = AnimationUtils.loadAnimation(this, R.anim.buttonanimation)
         buttonAnimation.fillAfter = true
         editTextAnimation.fillAfter = true
 
-        editTextAnimation.setAnimationListener(object : Animation.AnimationListener{
+        editTextAnimation.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationRepeat(p0: Animation?) {
             }
 
@@ -57,7 +48,7 @@ class SignUpActivity : AppCompatActivity() {
             }
 
         })
-        buttonAnimation.setAnimationListener(object : Animation.AnimationListener{
+        buttonAnimation.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationRepeat(p0: Animation?) {
             }
 
@@ -69,15 +60,16 @@ class SignUpActivity : AppCompatActivity() {
             }
 
         })
-        password.addTextChangedListener(object : TextWatcher{
+        password.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
             }
+
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
+
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if(!isAnimated)
-                {
-                    if(p0!!.length >= 8){
+                if (!isAnimated) {
+                    if (p0!!.length >= 8) {
                         phone.startAnimation(editTextAnimation)
                         signUpButton.startAnimation(buttonAnimation)
                         isAnimated = true
@@ -88,19 +80,19 @@ class SignUpActivity : AppCompatActivity() {
         })
 
 
-        signUpButton.setOnClickListener({view ->
-            if(password.text.length < 8){
+
+
+        signUpButton.setOnClickListener({ view ->
+            if (password.text.length < 8) {
                 val alertDialog = AlertDialog.Builder(this).setTitle("Ошибка")
                         .setMessage("Пароль должен содержать 8 и более символов")
                         .setPositiveButton("OK",
-                                {dialogInterface, i ->  })
+                                { dialogInterface, i -> })
                 alertDialog.show()
-            }
-            else {
+            } else {
                 SignUpTask(this, username.text.toString(),
                         phone.text.toString(),
                         password.text.toString()).execute()
-                Log.i("TAG", "Async")
             }
         })
     }

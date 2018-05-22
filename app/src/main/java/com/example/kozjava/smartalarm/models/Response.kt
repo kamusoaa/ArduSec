@@ -1,4 +1,4 @@
-package com.example.kozjava.smartalarm.models.user
+package com.example.kozjava.smartalarm.models
 
 /**
  * Created by kozjava on 18.05.2018.

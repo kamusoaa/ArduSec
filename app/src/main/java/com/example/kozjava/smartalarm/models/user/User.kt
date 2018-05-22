@@ -7,20 +7,26 @@ import io.realm.RealmObject
  */
 open class User() : RealmObject() {
 
-    lateinit var phone : String
-    lateinit var name : String
+    lateinit var phone: String
+    lateinit var name: String
     lateinit var password: String
 
-    var username : String
+    var username: String
         get() = this.name!!
-        set(value) { name = value}
+        set(value) {
+            name = value
+        }
 
-    var passwd : String
+    var passwd: String
         get() = this.password!!
-        set(value) {password = value}
+        set(value) {
+            password = value
+        }
 
-    var mobilePhone : String
+    var mobilePhone: String
         get() = this.phone
-        set(value) {phone = value}
+        set(value) {
+            phone = value
+        }
 
 }

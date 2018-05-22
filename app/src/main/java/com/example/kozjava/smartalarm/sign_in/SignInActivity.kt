@@ -1,23 +1,15 @@
 package com.example.kozjava.smartalarm.sign_in
 
 import android.animation.Animator
-import android.annotation.TargetApi
-import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.os.AsyncTask
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.annotation.RequiresApi
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import com.example.kozjava.smartalarm.R
 import com.example.kozjava.smartalarm.home.HomeActivity
 import com.example.kozjava.smartalarm.models.user.User
@@ -39,7 +31,7 @@ class SignInActivity : AppCompatActivity() {
         changeStatusColorBar()
         var shimmer: Shimmer = Shimmer()
         var prefManager = PrefManager(this)
-        if(prefManager.username.isNotEmpty())
+        if (prefManager.username.isNotEmpty())
             launchHomeScreen()
 
 
@@ -50,7 +42,7 @@ class SignInActivity : AppCompatActivity() {
 
         signInButton.setOnClickListener {
             onButtonClick()
-            Log.i("TAG","meh")
+            Log.i("TAG", "meh")
         }
 
         linkToReg.setOnClickListener {
@@ -86,22 +78,23 @@ class SignInActivity : AppCompatActivity() {
             window.statusBarColor = this.resources.getColor(R.color.sign_primary)
         }
     }
-    private fun launchHomeScreen(){
-        val intent = Intent(this, HomeActivity::class.java )
+
+    private fun launchHomeScreen() {
+        val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
     }
+
     private fun onButtonClick() {
-        if(username.text.isNotEmpty() && password.text.isNotBlank()){
+        if (username.text.isNotEmpty() && password.text.isNotBlank()) {
             var user = User()
             user.username = username.text.toString()
             user.passwd = password.text.toString()
             SignInTask(this, user).execute()
-        }
-        else {
+        } else {
             val alertDialog = AlertDialog.Builder(this).setTitle("Ошибка")
                     .setMessage("Проверьте введенные данные")
                     .setPositiveButton("OK",
-                    {dialogInterface, i ->  })
+                            { dialogInterface, i -> })
             alertDialog.show()
         }
     }

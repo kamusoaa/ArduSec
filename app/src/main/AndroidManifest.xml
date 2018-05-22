@@ -22,10 +22,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".slider.SliderActivity" />
-        <activity android:name=".sign_in.SignInActivity" />
-        <activity android:name=".sign_up.SignUpActivity" />
-        <activity android:name=".home.HomeActivity"></activity>
+        <activity android:name=".slider.SliderActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".sign_in.SignInActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".sign_up.SignUpActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".home.HomeActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

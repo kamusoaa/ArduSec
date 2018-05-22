@@ -20,17 +20,17 @@ import com.example.kozjava.smartalarm.sign_in.SignInActivity
 
 class SliderActivity : AppCompatActivity() {
 
-    private lateinit var viewPager : ViewPager
-    private lateinit var dotsLayout : LinearLayout
+    private lateinit var viewPager: ViewPager
+    private lateinit var dotsLayout: LinearLayout
     private lateinit var mySliderViewPageAdapter: SliderViewPageAdapter
 
     private lateinit var dots: Array<TextView?>
-    private lateinit var layouts : IntArray
+    private lateinit var layouts: IntArray
 
-    private lateinit var btnSkip : Button
-    private lateinit var btnNext : Button
+    private lateinit var btnSkip: Button
+    private lateinit var btnNext: Button
     private lateinit var prefManager: PrefManager
-    private lateinit var typeface : Typeface
+    private lateinit var typeface: Typeface
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,23 +65,22 @@ class SliderActivity : AppCompatActivity() {
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener)
 
 
-        btnSkip.setOnClickListener {view -> launchSignInScreen()}
-        btnNext.setOnClickListener{view ->
-            var current : Int = getItem(+1)
-            if(current < layouts.size)
+        btnSkip.setOnClickListener { view -> launchSignInScreen() }
+        btnNext.setOnClickListener { view ->
+            var current: Int = getItem(+1)
+            if (current < layouts.size)
                 viewPager.setCurrentItem(current)
             else
                 launchSignInScreen()
         }
     }
 
-    private fun addBottomDots(currentPage: Int){
+    private fun addBottomDots(currentPage: Int) {
         dots = arrayOfNulls(layouts.size)
-        var colorActive : IntArray = resources.getIntArray(R.array.array_dot_active)
-        var colorInactive : IntArray = resources.getIntArray(R.array.array_dot_inactive)
+        var colorActive: IntArray = resources.getIntArray(R.array.array_dot_active)
+        var colorInactive: IntArray = resources.getIntArray(R.array.array_dot_inactive)
         dotsLayout.removeAllViews()
-        for (i in dots.indices)
-        {
+        for (i in dots.indices) {
             dots[i] = TextView(this)
             dots[i]?.setText(Html.fromHtml("&#8226;"))
             dots[i]?.setTextSize(35F)
@@ -94,28 +93,30 @@ class SliderActivity : AppCompatActivity() {
 
     }
 
-    private fun changeStatusColorBar(){
+    private fun changeStatusColorBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val window = window
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             window.statusBarColor = Color.TRANSPARENT
         }
     }
-    private fun launchSignInScreen(){
+
+    private fun launchSignInScreen() {
         prefManager.isFirstTimeLaunch = false
-        val intent = Intent(this,SignInActivity::class.java )
+        val intent = Intent(this, SignInActivity::class.java)
         startActivity(intent)
     }
 
-    private fun launchHomeScreen(){
+    private fun launchHomeScreen() {
         prefManager.isFirstTimeLaunch = false
-        val intent = Intent(this,HomeActivity::class.java )
+        val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
     }
 
     private fun getItem(i: Int): Int {
         return viewPager.currentItem + i
     }
+
     internal var viewPagerPageChangeListener: ViewPager.OnPageChangeListener = object : ViewPager.OnPageChangeListener {
 
         override fun onPageSelected(position: Int) {

@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-class SliderViewPageAdapter(private val activity : Activity, var layouts : IntArray) : PagerAdapter() {
+class SliderViewPageAdapter(private val activity: Activity, var layouts: IntArray) : PagerAdapter() {
 
-    lateinit var layoutInflater : LayoutInflater
+    lateinit var layoutInflater: LayoutInflater
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view == `object`
     }

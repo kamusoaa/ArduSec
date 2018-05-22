@@ -8,7 +8,7 @@ class PrefManager(internal var _context: Context) {
 
     internal var pref: SharedPreferences
     internal var editor: SharedPreferences.Editor
-    lateinit var user : String
+    lateinit var user: String
 
     internal var PRIVATE_MODE = 0
 
@@ -19,7 +19,7 @@ class PrefManager(internal var _context: Context) {
             editor.commit()
         }
 
-    var username : String
+    var username: String
         get() = pref.getString(USERNAME, "")
         set(value) {
             editor.putString(USERNAME, value)

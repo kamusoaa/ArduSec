@@ -50,4 +50,7 @@
     <color name="sliding_primaryDark">#00695c</color>
     <color name="sliding_scroll">#004d40</color>
 
+
+    <color name="bg_slide1">#eee9ef</color>
+
 </resources>
