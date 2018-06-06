@@ -1,6 +1,7 @@
 package com.example.kozjava.smartalarm.sign_up
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Context
@@ -13,13 +14,14 @@ import com.example.kozjava.smartalarm.settings.PrefManager
 import com.google.gson.Gson
 import khttp.post
 
-class SignUpTask(context : Context, name : String, phone : String, pass : String) : AsyncTask<Void, Void, String>() {
+class SignUpTask(context : Context, name : String, phone : String, pass : String, activity: Activity) : AsyncTask<Void, Void, String>() {
 
     private var dialog : ProgressDialog
     private lateinit var prefManager : PrefManager
     private var name: String
     private var pass: String
     private var phone: String
+    private lateinit var activity: Activity
     @SuppressLint("StaticFieldLeak")
     private var context: Context
 
@@ -31,6 +33,7 @@ class SignUpTask(context : Context, name : String, phone : String, pass : String
         this.name = name
         this.pass = pass
         this.phone = phone
+        this.activity = activity
     }
 
     override fun doInBackground(vararg p0: Void?): String {
@@ -68,6 +71,7 @@ class SignUpTask(context : Context, name : String, phone : String, pass : String
             prefManager.username = name
             val intent = Intent(context, HomeActivity::class.java)
             context.startActivity(intent)
+            activity.finish()
 
         }
     }

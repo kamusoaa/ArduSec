@@ -92,7 +92,7 @@ class SignUpActivity : AppCompatActivity() {
             } else {
                 SignUpTask(this, username.text.toString(),
                         phone.text.toString(),
-                        password.text.toString()).execute()
+                        password.text.toString(), this).execute()
             }
         })
     }

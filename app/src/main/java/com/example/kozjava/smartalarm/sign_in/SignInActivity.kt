@@ -32,8 +32,10 @@ class SignInActivity : AppCompatActivity() {
         var shimmer: Shimmer = Shimmer()
         var prefManager = PrefManager(this)
         if (prefManager.username.isNotEmpty())
+        {
             launchHomeScreen()
-
+            finish()
+        }
 
         username = findViewById(R.id.sign_in_username)
         password = findViewById(R.id.sign_in_password)
@@ -89,7 +91,7 @@ class SignInActivity : AppCompatActivity() {
             var user = User()
             user.username = username.text.toString()
             user.passwd = password.text.toString()
-            SignInTask(this, user).execute()
+            SignInTask(this, user, this).execute()
         } else {
             val alertDialog = AlertDialog.Builder(this).setTitle("Ошибка")
                     .setMessage("Проверьте введенные данные")

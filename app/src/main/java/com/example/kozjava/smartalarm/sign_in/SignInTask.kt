@@ -1,6 +1,7 @@
 package com.example.kozjava.smartalarm.sign_in
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
@@ -18,11 +19,12 @@ import khttp.post
 /**
  * Created by kozjava on 17.05.2018.
  */
-class SignInTask(context: Context, user : User) : AsyncTask<Void, Void, String>() {
+class SignInTask(context: Context, user : User, activity: Activity) : AsyncTask<Void, Void, String>() {
 
     private var dialog : ProgressDialog
     private lateinit var user : User
     private lateinit var prefManager : PrefManager
+    private lateinit var activity: Activity
 
     @SuppressLint("StaticFieldLeak")
     private lateinit var context : Context
@@ -30,6 +32,7 @@ class SignInTask(context: Context, user : User) : AsyncTask<Void, Void, String>(
         dialog = ProgressDialog(context)
         this.user = user
         this.context = context
+        this.activity = activity
     }
 
     override fun doInBackground(vararg p0: Void?): String? {
@@ -65,6 +68,7 @@ class SignInTask(context: Context, user : User) : AsyncTask<Void, Void, String>(
             prefManager.username = user.username
             var intent = Intent(context, HomeActivity::class.java)
             context.startActivity(intent)
+            activity.finish()
         }
     }
 
